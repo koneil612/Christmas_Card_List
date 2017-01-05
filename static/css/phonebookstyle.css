@@ -1,0 +1,99 @@
+@font-face {
+    src: url('fonts/Christbaumkugeln.otf');
+    src: url('fonts/Jasmine.otf');
+}
+
+body {
+    background-color: #990033;
+    font-family: 'Jasmine';
+    font-size: 34px;
+    color: #CC9933;
+}
+
+/*button {
+    margin: 15px;
+    border-radius: 20px;
+    border: solid black;
+    border-bottom: 2px;
+    border-left: 2px;
+    background-color: white;
+
+
+}*/
+
+.container {
+  /*display: flex;*/
+  justify-content: center;
+}
+
+.container a {
+    font-size: 40px;
+    color: purple;
+}
+
+.overlay {
+    font-family: 'Christbaumkugeln';
+    text-align: center;
+    font-size: 52px;
+    color: white;
+}
+
+#nav a{
+    text-decoration: none;
+    color:#CC9933;
+}
+
+
+.entry input {
+    width: 100%;
+}
+.left {
+    color: #669999;
+    background-color: white;
+    border-radius: 25px;
+    margin-left: 15px;
+    margin-right: 15px;
+    /*padding: 5px;*/
+}
+
+.left a {
+    text-decoration: none;
+    color: #669999
+}
+
+.entry {
+    color: #669999;
+    background-color: white;
+    background-repeat: no-repeat;
+    border-radius: 25px;
+    /*padding: 5px;*/
+    /*margin:5px;*/
+    margin:0px 5px;
+}
+.row {
+    margin-right: -70px;
+}
+.right {
+    width: 20%;
+    height: auto;
+    /*margin-right: 0px !important;*/
+}
+.right img {
+    background-color: white;
+    width: 100%;
+    height: auto;
+    border-radius: 25px;
+}
+
+
+.entry a {
+    text-decoration: none;
+    font-size: 20px;
+    text-align: right;
+}
+
+.footer {
+    position: static;
+    text-align: center;
+    padding: 12px;
+}

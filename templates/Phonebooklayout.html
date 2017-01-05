@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="/static/css/phonebookstyle.css" />
+  </head>
+
+  <body>
+
+      {% block headernav %}
+      <div class="overlay">
+       <img src="/static/img/overlay2.png" style="max-width: auto; max-height: 200px" />
+       <br />
+           Christmas:Card:List
+       </div>
+      <div id="nav" style="text-align: center">
+      <a href="new_entry">Click here to add a new Christmas Card entry</a>
+
+      </div>
+      {% endblock %}
+      <div class="container-fluid">
+
+      <div class="row" id=bulk>
+          <div class="col-md-3 left">
+              <b><u>Options:</b></u><br />
+              <a href="/home">Home</a><br />
+             <a href="new_entry">Add a new contact</a><br />
+              Export to Excel<br />
+              Print as Labels<br />
+              <a href="phonebook">See entire list</a><br/>
+              <a href='/logout'>Logout</a>
+          </br/>
+
+          </div>
+          <div class="col-md-6 middle entry">
+              {% block listing %}
+              <!-- body of phonelisting.html -->
+              {% endblock %}
+
+              {% block content %}
+              <!-- body of phonebook.html -->
+              {% endblock %}
+
+              {% block body %}
+              <!-- body of new entry.html -->
+              {% endblock %}
+          </div>
+          <div class="col-md-3 right"><img src="/static/img/raindeer.jpg">
+          </div>
+      </div>
+      </div>
+
+    {% block footer %}
+    <div class="row footer" >
+        <div class="col-md-12">
+        <img src="/static/img/overlay12.png" class="footerimg" style="max-width: 200px;">
+    </div>
+    </div>
+    {% endblock %}
+  </body>
+</html>

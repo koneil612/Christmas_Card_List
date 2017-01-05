@@ -1,0 +1,37 @@
+{% extends "phonebooklayout.html" %}
+{% block body %}
+<h1>New Christmas Card Entry</h1>
+<form action="/submit_new_entry" method="POST">
+  <p>
+    <label for="firstname">First Name</label><br>
+    <input type="text" name="firstname">
+  </p>
+  <p>
+    <label for="lastname">Last Name</label><br>
+    <input type="text" name="lastname">
+  </p>
+  <p>
+    <label for="address">Address</label><br>
+    <input type="text" name="address">
+  </p>
+  <p>
+    <label for="address">Address2</label><br>
+    <input type="text" name="address2">
+  </p>
+  <p>
+    <label for="City">City</label><br>
+    <input type="text" name="city">
+  </p>
+  <p>
+    <label for="State">State</label><br>
+    <input type="text" name="state">
+  </p>
+  <p>
+    <label for="Zip">Zip</label><br>
+    <input type="text" name="zip">
+  </p>
+  <p>
+    <button type="submit">Add New Contact</button>
+  </p>
+</form>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "phonebooklayout.html" %}
+
+{% block content %}
+
+{% for contacts in result_set %}
+   <p >
+    {{contacts.firstname}}&nbsp;{{contacts.lastname}}
+    <a href="update_entry?id={{id}}">-Update-</a>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/delete_contact?id={{id}}">-Delete-</a><br />
+    {{contacts.address}}{{contacts.address2}}<br />
+    {{contacts.city}}, {{contacts.state}}, {{contacts.zip}}
+    <br />
+    </p>
+{% endfor %}
+{% endblock %}

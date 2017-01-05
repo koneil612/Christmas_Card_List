@@ -1,0 +1,38 @@
+{% extends "phonebooklayout.html" %}
+{% block body %}
+<h1>Update your Christmas Card Entry</h1>
+<form action="/submit_update_entry" method="POST">
+  <p>
+    <label for="firstname">First Name</label><br>
+    <input type="text" name="firstname" VALUE="{{firstname}}">
+    <input type="hidden" name="id" VALUE="{{id}}">
+  </p>
+  <p>
+    <label for="lastname">Last Name</label><br>
+    <input type="text" name="lastname" VALUE="{{lastname}}">
+</p>
+  <p>
+    <label for="address">Address</label><br>
+    <input type="text" size="60" name="address" value="{{address}}">
+  </p>
+  <p>
+    <label for="address2">Address2</label><br>
+    <input type="text" size="60" name="address2" value="{{address2}}">
+  </p>
+  <p>
+    <label for="City">City</label><br>
+    <input type="text" size="60" name="city" value={{city}}>
+  </p>
+  <p>
+    <label for="State">State</label><br>
+    <input type="text" size="60" name="state" value="{{state}}">
+  </p>
+  <p>
+    <label for="Zip">Zip</label><br>
+    <input type="text" size="60" name="zip" value="{{zip}}">
+  </p>
+  <p>
+    <button type="submit">Update Contact</button>
+  </p>
+</form>
+{% endblock %}
