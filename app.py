@@ -4,12 +4,6 @@ from flask import Flask, render_template, request, redirect, url_for, session
 from christmascardlist import *
 
 
-DBUSER=os.environ.get('DBUSER', True)
-DBPASS=os.environ.get('DBPASS', True)
-DBHOST=os.environ.get('DBHOST', True)
-DBNAME=os.environ.get('DBNAME', True)
-db = pg.DB(host=DBHOST, user=DBUSER, passwd=DBPASS, dbname=DBNAME)
-
 # ##this is making sure that everything is in utf8
 import sys
 reload(sys)
@@ -21,7 +15,7 @@ app.secret_key = "herro"
 
 
 ###
-# Routing for your application.
+# Routing for your application. Each route is a new page location and saying where we want it to go / do
 ###
 
 @app.route('/', methods=['POST', 'GET'])
@@ -60,7 +54,7 @@ def home():
     #redir to login
     # if 'username' not in session:
     #     return redirect('/submit_login')
-    db = pg.DB(host=DBHOST, user=DBUSER, passwd=DBPASS, dbname=DBNAME)
+
     query = db.query ("SELECT id, firstname, lastname, address, address2, city, state, zip FROM addresses")
     result_set = query.namedresult()
     db.close()
@@ -89,11 +83,15 @@ def submit_new_entry():
     city=request.form.get('city')
     state=request.form.get('state')
     szip=request.form.get('zip')
-    db = pg.DB(host=DBHOST, user=DBUSER, passwd=DBPASS, dbname=DBNAME)
-    q = "INSERT INTO addresses (firstname, lastname, address, address2, city, state, zip) values ('%s','%s','%s','%s','%s','%s','%s')" % (Database.escape(firstname), Database.escape(lastname), Database.escape(address), Database.escape(address2), Database.escape(city), Database.escape(state), szip)
-    query = db.query(q)
-
+    entry = Entry()
+    entry.firstname=request.form.get('firstname')
+    entry.save()
     return render_template("submit_new_entry.html", firstname=firstname, lastname=lastname, address=address, address2=address2, city=city, state=state, zip=szip)
+
+    # q = "INSERT INTO addresses (firstname, lastname, address, address2, city, state, zip) values ('%s','%s','%s','%s','%s','%s','%s')" % (Database.escape(firstname), Database.escape(lastname), Database.escape(address), Database.escape(address2), Database.escape(city), Database.escape(state), szip)
+    # query = db.query(q)
+
+
 
 @app.route('/update_entry', methods=['GET'])
 def update_entry():
@@ -111,54 +109,34 @@ def update_entry():
     zip=list[7]
     return render_template("update_entry.html", firstname=firstname, lastname=lastname, address=address, address2=address2, city=city, state=state, zip=zip,id=id)
 
-@app.route('/about/')
-def about():
-    """Render the website's about page."""
-    return render_template('about.html')
-
 
 ###
 # The functions below should be applicable to all Flask apps.
 ###
 
-@app.route('/<file_name>.txt')
-def send_text_file(file_name):
-    """Send your static text file."""
-    file_dot_text = file_name + '.txt'
-    return app.send_static_file(file_dot_text)
+# @app.route('/<file_name>.txt')
+# def send_text_file(file_name):
+#     """Send your static text file."""
+#     file_dot_text = file_name + '.txt'
+#     return app.send_static_file(file_dot_text)
 
 
-@app.after_request
-def add_header(response):
-    """
-    Add headers to both force latest IE rendering engine or Chrome Frame,
-    and also to cache the rendered page for 10 minutes.
-    """
-    response.headers['X-UA-Compatible'] = 'IE=Edge,chrome=1'
-    response.headers['Cache-Control'] = 'public, max-age=600'
-    return response
+# @app.after_request
+# def add_header(response):
+#     """
+#     Add headers to both force latest IE rendering engine or Chrome Frame,
+#     and also to cache the rendered page for 10 minutes.
+#     """
+#     response.headers['X-UA-Compatible'] = 'IE=Edge,chrome=1'
+#     response.headers['Cache-Control'] = 'public, max-age=600'
+#     return response
+#
+#
+# @app.errorhandler(404)
+# def page_not_found(error):
+#     """Custom 404 page."""
+#     return render_template('404.html'), 404
 
-
-@app.errorhandler(404)
-def page_not_found(error):
-    """Custom 404 page."""
-    return render_template('404.html'), 404
-
-
-class Database(object):
-    @staticmethod
-    def escape(value):
-        return value.replace("'","''")
-
-    # def getResult(query, getOne = False):
-    #     conn = Database.getConnection()
-    #     cur = conn.cursor()
-    #     cur.execute(query)
-    #     if getOne:
-    #         result_set = fetchone()
-    #     else:
-    #         result_set = fetchall()
-    #     return result_set
 
 if __name__ == '__main__':
     app.run(debug=True)
