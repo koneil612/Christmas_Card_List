@@ -29,7 +29,6 @@ def login():
 def submit_login():
     username = request.form.get('username')
     password = request.form.get('password')
-    db = pg.DB(host=DBHOST, user=DBUSER, passwd=DBPASS, dbname=DBNAME)
     query = db.query("SELECT username, password FROM \"user\" WHERE username = '%s'" % username)
     result_list = query.namedresult()
     if result_list and len(result_list) > 0:
@@ -54,18 +53,12 @@ def home():
     #redir to login
     # if 'username' not in session:
     #     return redirect('/submit_login')
-
-    query = db.query ("SELECT id, firstname, lastname, address, address2, city, state, zip FROM addresses")
-    result_set = query.namedresult()
-    db.close()
-
-    return render_template("phonebooklisting.html", title="Christmas Card List", result_set = result_set)
+    return render_template("phonebooklisting.html", title="Christmas Card List")
 
 @app.route('/phonebook', methods= ['GET'])
 #pulls all the listings in the phonebook
 def phonebook():
-    db = pg.DB(host=DBHOST, user=DBUSER, passwd=DBPASS, dbname=DBNAME)
-    query =  db.query("SELECT id, firstname, lastname, address, address2, city, state, zip FROM addresses")
+
     result_set = query.namedresult()
     db.close()
     return render_template("phonebook.html", title="Christmas Card List", result_set=result_set)
